@@ -1,0 +1,578 @@
+views:
+- title: Kameras
+  path: kameras
+  type: sections
+  sections:
+  - type: grid
+    cards:
+    - type: conditional
+      conditions:
+      - condition: state
+        entity: input_boolean.kamera_dashboard_entsperrt
+        state: 'off'
+      card:
+        type: vertical-stack
+        cards:
+        - type: heading
+          heading: Kamera-Dashboard gesperrt
+          icon: mdi:lock
+        - type: entities
+          entities:
+          - entity: input_text.kamera_dashboard_pin
+            name: PIN
+          - entity: counter.kamera_dashboard_fehlversuche
+            name: Fehlversuche
+          - entity: timer.kamera_dashboard_sperrzeit
+            name: Sperrzeit
+        - type: button
+          entity: input_button.kamera_dashboard_entsperren
+          name: Dashboard entsperren
+          icon: mdi:lock-open
+          tap_action:
+            action: call-service
+            service: input_button.press
+            target:
+              entity_id: input_button.kamera_dashboard_entsperren
+    - type: conditional
+      conditions:
+      - condition: state
+        entity: input_boolean.kamera_dashboard_entsperrt
+        state: 'on'
+      card:
+        type: vertical-stack
+        cards:
+        - type: heading
+          heading: Kameraansicht
+        - type: entities
+          entities:
+          - entity: input_select.dashboard_view
+            name: Ansicht
+          - entity: input_select.gebaeude_auswahl
+            name: Gebäude
+          - entity: input_select.kamera_auswahl
+            name: Aktive PTZ-Kamera
+        - type: button
+          entity: input_button.kamera_dashboard_sperren
+          name: Dashboard sperren
+          icon: mdi:lock
+          tap_action:
+            action: call-service
+            service: input_button.press
+            target:
+              entity_id: input_button.kamera_dashboard_sperren
+  - type: grid
+    cards:
+    - type: conditional
+      conditions:
+      - condition: state
+        entity: input_boolean.kamera_dashboard_entsperrt
+        state: 'on'
+      - condition: state
+        entity: input_select.dashboard_view
+        state: Haus/Garage
+      - entity: input_select.gebaeude_auswahl
+        state: Haus
+      card:
+        square: true
+        type: grid
+        title: Haus
+        columns: 2
+        cards:
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_22_0_1
+          name: Kamera 1
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 1
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_22_1_1
+          name: Kamera 2
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 2
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_22_2_1
+          name: Kamera 3
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 3
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_22_3_1
+          name: Kamera 4
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 4
+      grid_options:
+        columns: full
+    - type: conditional
+      conditions:
+      - condition: state
+        entity: input_boolean.kamera_dashboard_entsperrt
+        state: 'on'
+      - entity: input_select.dashboard_view
+        state: Haus/Garage
+      - entity: input_select.gebaeude_auswahl
+        state: Garage
+      card:
+        square: true
+        type: grid
+        title: Garage
+        columns: 2
+        cards:
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_25_0_1
+          name: Kamera 5
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 5
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_25_1_1
+          name: Kamera 6
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 6
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_25_2_1
+          name: Kamera 7
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 7
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_25_3_1
+          name: Kamera 8
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 8
+      grid_options:
+        columns: full
+    - type: conditional
+      conditions:
+      - condition: state
+        entity: input_boolean.kamera_dashboard_entsperrt
+        state: 'on'
+      - entity: input_select.dashboard_view
+        state: Alle Kameras
+      card:
+        square: true
+        type: grid
+        title: Alle Kameras
+        columns: 4
+        cards:
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_22_0_1
+          name: Haus 1
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 1
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_22_1_1
+          name: Haus 2
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 2
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_22_2_1
+          name: Haus 3
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 3
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_22_3_1
+          name: Haus 4
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 4
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_25_0_1
+          name: Garage 1
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 5
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_25_1_1
+          name: Garage 2
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 6
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_25_2_1
+          name: Garage 3
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 7
+        - show_state: true
+          show_name: true
+          camera_view: live
+          fit_mode: cover
+          type: picture-entity
+          entity: camera.192_168_2_25_3_1
+          name: Garage 4
+          tap_action:
+            action: call-service
+            service: input_select.select_option
+            target:
+              entity_id: input_select.kamera_auswahl
+            data:
+              option: Kamera 8
+      grid_options:
+        columns: full
+    - type: conditional
+      conditions:
+      - condition: state
+        entity: input_boolean.kamera_dashboard_entsperrt
+        state: 'on'
+      - condition: state
+        entity: input_select.dashboard_view
+        state: Einzelkamera
+      card:
+        type: vertical-stack
+        cards:
+        - type: conditional
+          conditions:
+          - entity: input_select.kamera_auswahl
+            state: Kamera 1
+          card:
+            type: picture-entity
+            entity: camera.192_168_2_22_0
+            name: Haus 1
+            camera_view: live
+            fit_mode: contain
+            show_state: true
+            show_name: true
+        - type: conditional
+          conditions:
+          - entity: input_select.kamera_auswahl
+            state: Kamera 2
+          card:
+            type: picture-entity
+            entity: camera.192_168_2_22_1
+            name: Haus 2
+            camera_view: live
+            fit_mode: contain
+            show_state: true
+            show_name: true
+        - type: conditional
+          conditions:
+          - entity: input_select.kamera_auswahl
+            state: Kamera 3
+          card:
+            type: picture-entity
+            entity: camera.192_168_2_22_2
+            name: Haus 3
+            camera_view: live
+            fit_mode: contain
+            show_state: true
+            show_name: true
+        - type: conditional
+          conditions:
+          - entity: input_select.kamera_auswahl
+            state: Kamera 4
+          card:
+            type: picture-entity
+            entity: camera.192_168_2_22_3
+            name: Haus 4
+            camera_view: live
+            fit_mode: contain
+            show_state: true
+            show_name: true
+        - type: conditional
+          conditions:
+          - entity: input_select.kamera_auswahl
+            state: Kamera 5
+          card:
+            type: picture-entity
+            entity: camera.192_168_2_25_0
+            name: Garage 1
+            camera_view: live
+            fit_mode: contain
+            show_state: true
+            show_name: true
+        - type: conditional
+          conditions:
+          - entity: input_select.kamera_auswahl
+            state: Kamera 6
+          card:
+            type: picture-entity
+            entity: camera.192_168_2_25_1
+            name: Garage 2
+            camera_view: live
+            fit_mode: contain
+            show_state: true
+            show_name: true
+        - type: conditional
+          conditions:
+          - entity: input_select.kamera_auswahl
+            state: Kamera 7
+          card:
+            type: picture-entity
+            entity: camera.192_168_2_25_2
+            name: Garage 3
+            camera_view: live
+            fit_mode: contain
+            show_state: true
+            show_name: true
+        - type: conditional
+          conditions:
+          - entity: input_select.kamera_auswahl
+            state: Kamera 8
+          card:
+            type: picture-entity
+            entity: camera.192_168_2_25_3
+            name: Garage 4
+            camera_view: live
+            fit_mode: contain
+            show_state: true
+            show_name: true
+      grid_options:
+        rows: auto
+        columns: full
+  - type: grid
+    cards:
+    - type: conditional
+      conditions:
+      - condition: state
+        entity: input_boolean.kamera_dashboard_entsperrt
+        state: 'on'
+      card:
+        type: vertical-stack
+        cards:
+        - type: heading
+          heading: PTZ-Steuerung
+        - type: grid
+          columns: 3
+          square: true
+          cards:
+          - type: button
+            name: ''
+          - type: button
+            name: ⬆️
+            tap_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                richtung: up
+            hold_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                richtung: up
+          - type: button
+            name: ''
+          - type: button
+            name: ⬅️
+            tap_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                richtung: left
+            hold_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                richtung: left
+          - type: button
+            name: ⏺️
+          - type: button
+            name: ➡️
+            tap_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                richtung: right
+            hold_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                richtung: right
+          - type: button
+            name: ''
+          - type: button
+            name: ⬇️
+            tap_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                richtung: down
+            hold_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                richtung: down
+          - type: button
+            name: ''
+        - type: horizontal-stack
+          cards:
+          - type: button
+            name: 🔍+
+            tap_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                richtung: zoom_in
+            hold_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                richtung: zoom_in
+          - type: button
+            name: 🔍-
+            tap_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                richtung: zoom_out
+            hold_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                richtung: zoom_out
+        - type: entities
+          title: PTZ Geschwindigkeit
+          entities:
+          - entity: input_number.ptz_geschwindigkeit
+            name: Geschwindigkeit
+          - entity: input_number.ptz_delay
+            name: Verzögerung
+        - type: horizontal-stack
+          cards:
+          - type: button
+            name: Eingang
+            tap_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                preset: Eingang
+          - type: button
+            name: Garage
+            tap_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                preset: Garage
+          - type: button
+            name: Garten
+            tap_action:
+              action: call-service
+              service: script.kamera_ptz_joystick
+              data:
+                preset: Garten

@@ -1,0 +1,83 @@
+move:
+  name: Kamera kurz bewegen
+  description: Sendet mehrere kurze Richtungsimpulse und danach einen verstärkten Stop-Befehl.
+  fields:
+    host:
+      name: Recorder-IP
+      required: true
+      selector: {text: {}}
+    port:
+      name: Port
+      default: 10000
+      selector: {number: {min: 1, max: 65535, mode: box}}
+    channel:
+      name: Kanal
+      required: true
+      selector: {number: {min: 0, max: 3, step: 1, mode: box}}
+    direction:
+      name: Richtung
+      required: true
+      selector:
+        select:
+          options:
+            - {label: Oben, value: up}
+            - {label: Unten, value: down}
+            - {label: Links, value: left}
+            - {label: Rechts, value: right}
+            - {label: Stop, value: stop}
+    duration_ms:
+      name: Dauer
+      default: 120
+      selector: {number: {min: 20, max: 5000, step: 10, unit_of_measurement: ms}}
+    repeat_ms:
+      name: Wiederholungsabstand
+      default: 80
+      selector: {number: {min: 20, max: 1000, step: 10, unit_of_measurement: ms}}
+
+start_move:
+  name: Dauerbewegung starten
+  description: Startet wiederholte Richtungsimpulse über die bestehende Recorder-Sitzung.
+  fields:
+    host:
+      name: Recorder-IP
+      required: true
+      selector: {text: {}}
+    port:
+      name: Port
+      default: 10000
+      selector: {number: {min: 1, max: 65535, mode: box}}
+    channel:
+      name: Kanal
+      required: true
+      selector: {number: {min: 0, max: 3, step: 1, mode: box}}
+    direction:
+      name: Richtung
+      required: true
+      selector:
+        select:
+          options:
+            - {label: Oben, value: up}
+            - {label: Unten, value: down}
+            - {label: Links, value: left}
+            - {label: Rechts, value: right}
+    repeat_ms:
+      name: Wiederholungsabstand
+      default: 80
+      selector: {number: {min: 20, max: 1000, step: 10, unit_of_measurement: ms}}
+
+stop:
+  name: Bewegung stoppen
+  description: Beendet eine Dauerbewegung und sendet einen verstärkten Stop-Befehl.
+  fields:
+    host:
+      name: Recorder-IP
+      required: true
+      selector: {text: {}}
+    port:
+      name: Port
+      default: 10000
+      selector: {number: {min: 1, max: 65535, mode: box}}
+    channel:
+      name: Kanal
+      required: true
+      selector: {number: {min: 0, max: 3, step: 1, mode: box}}

@@ -1,0 +1,12 @@
+{
+  "domain": "eseecloud_ptz",
+  "name": "EseeCloud PTZ",
+  "version": "0.3.3",
+  "issue_tracker": "https://github.com/slauf82",
+  "codeowners": [
+    "@slauf82"
+  ],
+  "iot_class": "local_push",
+  "integration_type": "hub",
+  "config_flow": false
+}

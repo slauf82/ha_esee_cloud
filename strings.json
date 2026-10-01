@@ -1,0 +1,9 @@
+{
+  "title": "EseeCloud PTZ",
+  "services": {
+    "move": {
+      "name": "Kamera bewegen",
+      "description": "Sendet einen lokalen PTZ-Impuls."
+    }
+  }
+}
